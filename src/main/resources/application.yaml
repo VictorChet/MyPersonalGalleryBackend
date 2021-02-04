@@ -1,0 +1,22 @@
+server:
+    port: 8082
+
+spring:
+    datasource:
+        url: jdbc:postgresql://${DB_URL:localhost:5432/personal_galler}
+        username: postgres
+        password: Autodesk1
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 100MB
+            max-request-size: 100MB
+
+    jpa:
+        database: postgresql
+
+#    liquibase:
+#        change-log: classpath:/db/changelog/db.changelog-master.xml
+#        url: ${spring.datasource.url}
+#        user: ${spring.datasource.username}
+#        drop-first: true
