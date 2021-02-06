@@ -15,7 +15,9 @@ import viktor_chetvertukhin.MyPersonalGallery.business.entity.UserAccount;
 import viktor_chetvertukhin.MyPersonalGallery.business.service.UserAccountService;
 import viktor_chetvertukhin.MyPersonalGallery.dto.AuthorizationToken;
 import viktor_chetvertukhin.MyPersonalGallery.dto.RequestAuth;
+import viktor_chetvertukhin.MyPersonalGallery.dto.UserResponse;
 import viktor_chetvertukhin.MyPersonalGallery.helpers.ObjectToUrlEncodedConverter;
+import viktor_chetvertukhin.MyPersonalGallery.web.mapper.UserMapper;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -28,6 +30,13 @@ public class UserAccountServiceImpl implements UserAccountService {
     private final PictureRepository pictureRepository;
 
     private final UserAccountRepository userAccountRepository;
+
+    private final UserMapper userMapper;
+
+    @Override
+    public UserResponse getUserByUsername(String username) {
+        return userMapper.toDTO(userAccountRepository.getUserAccountByUsername(username));
+    }
 
     @Override
     @PreAuthorize("hasAuthority('ROLE_USER')")
@@ -76,3 +85,4 @@ public class UserAccountServiceImpl implements UserAccountService {
         return bodyRequest;
     }
 }
+
